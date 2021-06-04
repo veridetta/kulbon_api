@@ -110,8 +110,18 @@ class RatingController extends Controller
     }
     public function list(Request $request)
     {
-        $rat = Rating::where('food_id','=',$request->food_id)->get();
+        $rat = Rating::where('food_id','=',$request->food_id)->with('users')->get();
         return response()->json($rat, 200);
+    }
+    public function global(Request $request)
+    {
+        $rat = Rating::where('food_id','=',$request->food_id);
+        $dt=array(
+            "food_id"=>$request->food_id,
+            "total"=>$rat->count(),
+            "average"=>round($rat->avg('rating'),1)
+        );
+        return response()->json($dt, 200);
     }
     public function storeApp(Request $request)
     {
@@ -122,18 +132,28 @@ class RatingController extends Controller
             'rating' => 'required'
             
         ]);
-        $rating = new Rating();
-        $rating->user_id =$request->user_id;
-        $rating->food_id =$request->food_id;
-        $rating->comment =$request->comment;
-        $rating->rating =$request->rating;
-        if ($rating->save()) {
-            return response()->json(['success' => true]);
-        } else {
+        $rate = Rating::where('food_id','=',$request->food_id)->where('user_id','=',$request->user_id);
+        if($rate->count()<1){
+            $rating = new Rating();
+            $rating->user_id =$request->user_id;
+            $rating->food_id =$request->food_id;
+            $rating->comment =$request->comment;
+            $rating->rating =$request->rating;
+            if ($rating->save()) {
+                $rat = Rating::where('food_id','=',$request->food_id)->where('user_id','=',$request->user_id)->first();
+                return response()->json($rat, 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Post not added'
+                ], 500);
+            }
+        }else {
             return response()->json([
                 'success' => false,
                 'message' => 'Post not added'
             ], 500);
         }
+        
     }
 }

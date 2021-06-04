@@ -34,18 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('books.index') }}">Buku</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('orders.submitted') }}">Antrian</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('orders.proccess') }}">Daftar Pinjaman</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('orders.finish') }}">Daftar Selesai</a>
-                        </li>
+                    
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{ route('cats.index') }}">Kategori</a>
                         </li>

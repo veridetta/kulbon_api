@@ -32,6 +32,7 @@ Route::post('order', [OrderController::class, 'list']);
 Route::post('cat', [CatController::class, 'list']);
 Route::post('food', [FoodController::class, 'list']);
 Route::post('rating', [RatingController::class, 'list']);
+Route::post('rating/global', [RatingController::class, 'global']);
 Route::post('rating/add', [RatingController::class, 'storeApp']);
 Route::post('create-order', [OrderController::class, 'storeApp']);
 
