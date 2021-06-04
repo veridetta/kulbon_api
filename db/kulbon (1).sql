@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: May 30, 2021 at 10:12 AM
--- Server version: 10.3.29-MariaDB
--- PHP Version: 7.3.28
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 04 Jun 2021 pada 20.50
+-- Versi server: 10.4.17-MariaDB
+-- Versi PHP: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `perpussk_perpus`
+-- Database: `kulbon`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `books`
+-- Struktur dari tabel `books`
 --
 
 CREATE TABLE `books` (
@@ -41,7 +40,7 @@ CREATE TABLE `books` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `books`
+-- Dumping data untuk tabel `books`
 --
 
 INSERT INTO `books` (`id`, `title`, `author`, `release_year`, `created_at`, `updated_at`, `cover_url`, `cover_id`, `category_id`) VALUES
@@ -51,7 +50,28 @@ INSERT INTO `books` (`id`, `title`, `author`, `release_year`, `created_at`, `upd
 -- --------------------------------------------------------
 
 --
--- Table structure for table `failed_jobs`
+-- Struktur dari tabel `cats`
+--
+
+CREATE TABLE `cats` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cover` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `cats`
+--
+
+INSERT INTO `cats` (`id`, `created_at`, `updated_at`, `name`, `cover`) VALUES
+(1, '2021-06-01 15:42:08', '2021-06-01 15:56:57', 'Makanan Ring', 'https://res.cloudinary.com/karla190922/image/upload/v1622562130/cover/s51gehnc9ee7kwmoh0ay.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -67,7 +87,37 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Struktur dari tabel `food`
+--
+
+CREATE TABLE `food` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `open` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `facility` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `map` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gallery` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cover` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cat_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `food`
+--
+
+INSERT INTO `food` (`id`, `created_at`, `updated_at`, `name`, `address`, `price`, `phone`, `open`, `description`, `facility`, `map`, `gallery`, `cover`, `cat_id`) VALUES
+(1, '2021-06-01 17:18:31', '2021-06-01 18:00:37', 'WARUNG MAKAN IBU SARe', 'Kalijaga, Harjamukti, Cirebon City, West Java 45144', '15.000 - 20.000', '08817769047', 'Setiap hari 24 jam', 'Food is any substance consumed to provide nutritional support for an organism. Food is usually of plant, animal or fungal origin, and contains essential nutrients, such as carbohydrates, fats, proteins, vitamins, or minerals.', 'Service options\r\n\r\nTakeaway\r\n\r\nDine-in\r\nOfferings\r\n\r\nHalal food\r\nAmenities\r\n\r\nGood for kids\r\nAtmosphere\r\n\r\nCasual\r\n\r\nCosy\r\nPayments\r\n\r\nCash only', 'https://goo.gl/maps/HgauohzRuXPDGPx39', 'https://res.cloudinary.com/karla190922/image/upload/v1622567912/cover/ofeiy2ltktuzsbclu9qu.jpgkulbon2021', 'https://res.cloudinary.com/karla190922/image/upload/v1622567912/cover/ofeiy2ltktuzsbclu9qu.jpg', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -77,7 +127,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data untuk tabel `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -91,12 +141,15 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2019_08_19_000000_create_failed_jobs_table', 1),
 (9, '2021_03_06_210343_create_books_table', 1),
 (10, '2021_03_07_223733_add_file_path', 1),
-(11, '2021_03_08_011244_create_orders_table', 1);
+(11, '2021_03_08_011244_create_orders_table', 1),
+(12, '2021_06_01_205846_create_cats_table', 2),
+(13, '2021_06_01_211907_create_food_table', 2),
+(14, '2021_06_01_212710_create_ratings_table', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oauth_access_tokens`
+-- Struktur dari tabel `oauth_access_tokens`
 --
 
 CREATE TABLE `oauth_access_tokens` (
@@ -112,7 +165,7 @@ CREATE TABLE `oauth_access_tokens` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `oauth_access_tokens`
+-- Dumping data untuk tabel `oauth_access_tokens`
 --
 
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
@@ -128,7 +181,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oauth_auth_codes`
+-- Struktur dari tabel `oauth_auth_codes`
 --
 
 CREATE TABLE `oauth_auth_codes` (
@@ -143,7 +196,7 @@ CREATE TABLE `oauth_auth_codes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oauth_clients`
+-- Struktur dari tabel `oauth_clients`
 --
 
 CREATE TABLE `oauth_clients` (
@@ -161,7 +214,7 @@ CREATE TABLE `oauth_clients` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `oauth_clients`
+-- Dumping data untuk tabel `oauth_clients`
 --
 
 INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
@@ -171,7 +224,7 @@ INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `red
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oauth_personal_access_clients`
+-- Struktur dari tabel `oauth_personal_access_clients`
 --
 
 CREATE TABLE `oauth_personal_access_clients` (
@@ -182,7 +235,7 @@ CREATE TABLE `oauth_personal_access_clients` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `oauth_personal_access_clients`
+-- Dumping data untuk tabel `oauth_personal_access_clients`
 --
 
 INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
@@ -191,7 +244,7 @@ INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `u
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oauth_refresh_tokens`
+-- Struktur dari tabel `oauth_refresh_tokens`
 --
 
 CREATE TABLE `oauth_refresh_tokens` (
@@ -204,7 +257,7 @@ CREATE TABLE `oauth_refresh_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Struktur dari tabel `orders`
 --
 
 CREATE TABLE `orders` (
@@ -219,7 +272,7 @@ CREATE TABLE `orders` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `orders`
+-- Dumping data untuk tabel `orders`
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `book_id`, `status`, `tanggal`, `jam`, `created_at`, `updated_at`) VALUES
@@ -234,7 +287,7 @@ INSERT INTO `orders` (`id`, `user_id`, `book_id`, `status`, `tanggal`, `jam`, `c
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- Struktur dari tabel `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -246,7 +299,31 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `ratings`
+--
+
+CREATE TABLE `ratings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `comment` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rating` int(11) NOT NULL,
+  `food_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `ratings`
+--
+
+INSERT INTO `ratings` (`id`, `created_at`, `updated_at`, `comment`, `rating`, `food_id`, `user_id`) VALUES
+(2, '2021-06-02 15:26:31', '2021-06-02 15:26:31', 'Rasa Mantap nih', 4, 1, 15),
+(5, '2021-06-04 18:17:47', '2021-06-04 18:17:47', 'lumayan enak makanan nya, hara terjangkau', 5, 1, 20);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -264,11 +341,11 @@ CREATE TABLE `users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `kelas`, `token`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'null', 'dede55@gmail.com', NULL, '$2y$10$oAyfBe3jBsNzkMy4hS3xSueL4UR9QN7rNOIzzWhtNoIyAMi2Bz/w6', 'admin', NULL, NULL, NULL, '2021-05-24 16:24:39', '2021-05-29 17:26:42'),
+(1, 'Dede', 'dede55@gmail.com', NULL, '$2y$10$oAyfBe3jBsNzkMy4hS3xSueL4UR9QN7rNOIzzWhtNoIyAMi2Bz/w6', 'admin', NULL, NULL, NULL, '2021-05-24 16:24:39', '2021-05-29 17:26:42'),
 (2, 'dede', 'dede57@gmail.com', NULL, '$2y$10$91iYILQ7N0g7YvB7WY16m.pWqGlT8P1uA9ov9B9nFqZkEk24Pl6N6', 'admin', NULL, NULL, NULL, '2021-05-25 15:40:03', '2021-05-25 15:40:03'),
 (3, 'Alex', 'alex@gmail.com', NULL, '$2y$10$keVa44REodOG.KrdtZHfyu.tTiQ2UHggLH2aqmMgB3YwaxoTnc1aC', 'user', NULL, NULL, NULL, '2021-05-25 15:41:20', '2021-05-25 15:41:20'),
 (4, 'Alex', 'alex22@gmail.com', NULL, '$2y$10$oiSJDohKgVgy9XajVmfEU.8.gEWPLpEsZ0tTeZtqkj.KSlXTf18VO', 'user', NULL, NULL, NULL, '2021-05-25 15:47:39', '2021-05-25 15:47:39'),
@@ -293,60 +370,72 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ro
 --
 
 --
--- Indexes for table `books`
+-- Indeks untuk tabel `books`
 --
 ALTER TABLE `books`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `failed_jobs`
+-- Indeks untuk tabel `cats`
+--
+ALTER TABLE `cats`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indexes for table `migrations`
+-- Indeks untuk tabel `food`
+--
+ALTER TABLE `food`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `oauth_access_tokens`
+-- Indeks untuk tabel `oauth_access_tokens`
 --
 ALTER TABLE `oauth_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD KEY `oauth_access_tokens_user_id_index` (`user_id`);
 
 --
--- Indexes for table `oauth_auth_codes`
+-- Indeks untuk tabel `oauth_auth_codes`
 --
 ALTER TABLE `oauth_auth_codes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `oauth_auth_codes_user_id_index` (`user_id`);
 
 --
--- Indexes for table `oauth_clients`
+-- Indeks untuk tabel `oauth_clients`
 --
 ALTER TABLE `oauth_clients`
   ADD PRIMARY KEY (`id`),
   ADD KEY `oauth_clients_user_id_index` (`user_id`);
 
 --
--- Indexes for table `oauth_personal_access_clients`
+-- Indeks untuk tabel `oauth_personal_access_clients`
 --
 ALTER TABLE `oauth_personal_access_clients`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `oauth_refresh_tokens`
+-- Indeks untuk tabel `oauth_refresh_tokens`
 --
 ALTER TABLE `oauth_refresh_tokens`
   ADD PRIMARY KEY (`id`),
   ADD KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`);
 
 --
--- Indexes for table `orders`
+-- Indeks untuk tabel `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
@@ -354,60 +443,84 @@ ALTER TABLE `orders`
   ADD KEY `orders_book_id_foreign` (`book_id`);
 
 --
--- Indexes for table `password_resets`
+-- Indeks untuk tabel `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `ratings`
+--
+ALTER TABLE `ratings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `books`
+-- AUTO_INCREMENT untuk tabel `books`
 --
 ALTER TABLE `books`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `failed_jobs`
+-- AUTO_INCREMENT untuk tabel `cats`
+--
+ALTER TABLE `cats`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT untuk tabel `food`
 --
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `food`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `oauth_clients`
+-- AUTO_INCREMENT untuk tabel `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT untuk tabel `oauth_clients`
 --
 ALTER TABLE `oauth_clients`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `oauth_personal_access_clients`
+-- AUTO_INCREMENT untuk tabel `oauth_personal_access_clients`
 --
 ALTER TABLE `oauth_personal_access_clients`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT untuk tabel `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
