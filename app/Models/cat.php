@@ -14,7 +14,7 @@ class cat extends Model
 
     public function food()
     {
-        return $this->belongsTo(Food::class, 'food_id');
+        return $this->belongsTo(food::class, 'food_id');
     }
 
     public function cat()

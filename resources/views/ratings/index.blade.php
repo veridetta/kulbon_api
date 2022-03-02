@@ -36,7 +36,7 @@
                         @foreach ($ratings as $rating)  
                         <?php 
                          $user= \App\Models\User::where('id','=',$rating->user_id)->first();
-                         $food= \App\Models\Food::where('id','=',$rating->food_id)->first();?>  
+                         $food= \App\Models\food::where('id','=',$rating->food_id)->first();?>  
                                          
                         <tr>
                             <td class="text-center">{{ ++$i }}</td>

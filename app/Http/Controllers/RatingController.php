@@ -54,7 +54,7 @@ class RatingController extends Controller
         $rating->rating = $request->rating;
         $rating->comment = $request->comment;
         if ($rating->save()) {
-            return redirect()->route('ratings.index',$request->food_id)
+            return redirect()->to('review/'.$request->food_id)
                         ->with('success','Review berhasil ditambahkan');
         } else {
             return response()->json([
@@ -106,7 +106,10 @@ class RatingController extends Controller
      */
     public function destroy(rating $rating)
     {
-        //
+        $rating->delete();
+ 
+        return redirect()->route('foods.index')
+                        ->with('success','Review Berhasil dihapus');
     }
     public function list(Request $request)
     {
