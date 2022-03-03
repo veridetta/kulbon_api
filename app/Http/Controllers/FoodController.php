@@ -144,7 +144,13 @@ class FoodController extends Controller
     }
     public function list(Request $request)
     {
-        $cat = Food::where($request->name,"like","%".$request->description."%")->get();
+        if($request->name=="cat_id"){
+            $cat = Food::where($request->name, $request->id)->get();
         return response()->json($cat, 200);
+        }else{
+          $cat = Food::where($request->name,"like","%".$request->description."%")->get();
+        return response()->json($cat, 200);  
+        }
+        
     }
 }
